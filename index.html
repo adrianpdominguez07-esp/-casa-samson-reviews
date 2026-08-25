@@ -43,19 +43,28 @@
   <main>
     <h1>⭐ Casa Samson</h1>
     <p>¿Has disfrutado de tu visita? Nos ayudaría mucho que dejaras una reseña en Google.</p>
-
     <a class="review"
-       href="https://search.google.com/local/writereview?placeid=ChIJxRVNFABZYA0R6H2YtxLNIZs">
+       href="https://search.google.com/local/writereview?placeid=ChIJxRVNFABZYA0R6H2YtxLNIZs"
+       rel="noopener">
       ⭐ Dejar una reseña en Google
     </a>
-
     <a class="maps"
-       href="https://www.google.com/maps/search/?api=1&query=Casa+Samson%2C+Riba-roja+de+T%C3%BAria&query_place_id=ChIJxRVNFABZYA0R6H2YtxLNIZs">
+       href="https://www.google.com/maps/search/?api=1&query=Casa+Samson%2C+Riba-roja+de+T%C3%BAria&query_place_id=ChIJxRVNFABZYA0R6H2YtxLNIZs"
+       rel="noopener">
       📍 Abrir Casa Samson en Google Maps
     </a>
-
     <small>Si el primer botón no se abre correctamente, utiliza Google Maps.</small>
   </main>
+  <script>
+    // Elimina cualquier service worker antiguo que pudiera estar
+    // causando bucles de caché/redirects en Safari.
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.getRegistrations().then(function(registrations) {
+        for (const registration of registrations) {
+          registration.unregister();
+        }
+      });
+    }
+  </script>
 </body>
 </html>
--
