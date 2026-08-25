@@ -1,0 +1,231 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#F7EFDD">
+<title>Casa Samson · Reseñas</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,700;1,9..144,600&family=Work+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --wall:#F7EFDD;
+    --wall-2:#F0E4C9;
+    --azulejo:#1C4E63;
+    --azulejo-2:#2E7C93;
+    --saffron:#D79922;
+    --clay:#A63A2C;
+    --ink:#241C14;
+    --ink-soft:#5B4E3E;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  body{
+    min-height:100vh;
+    background:
+      radial-gradient(circle at 15% 10%, rgba(215,153,34,.10), transparent 45%),
+      radial-gradient(circle at 85% 90%, rgba(28,78,99,.10), transparent 45%),
+      var(--wall);
+    color:var(--ink);
+    font-family:"Work Sans", -apple-system, BlinkMacSystemFont, sans-serif;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:28px 16px;
+  }
+
+  main{
+    width:min(94%, 440px);
+    background:#FFFDF8;
+    border-radius:6px;
+    overflow:hidden;
+    box-shadow:0 1px 2px rgba(36,28,20,.06), 0 18px 40px -14px rgba(36,28,20,.28);
+    border:1px solid rgba(36,28,20,.06);
+  }
+
+  /* Azulejo tile strip — the signature element */
+  .tiles{
+    display:flex;
+    width:100%;
+    line-height:0;
+  }
+  .tiles svg{ width:12.5%; height:16px; display:block; }
+
+  .content{ padding:38px 30px 30px; text-align:center; }
+
+  .eyebrow{
+    display:inline-block;
+    font-size:11.5px;
+    letter-spacing:.22em;
+    text-transform:uppercase;
+    color:var(--azulejo-2);
+    font-weight:600;
+    margin-bottom:14px;
+    opacity:0;
+    animation:rise .6s ease forwards .05s;
+  }
+
+  h1{
+    font-family:"Fraunces", serif;
+    font-weight:700;
+    font-size:clamp(30px, 8vw, 38px);
+    line-height:1.05;
+    margin:0 0 16px;
+    color:var(--ink);
+    opacity:0;
+    animation:rise .6s ease forwards .15s;
+  }
+
+  .stars{
+    display:flex;
+    justify-content:center;
+    gap:5px;
+    margin-bottom:18px;
+  }
+  .stars svg{
+    width:20px; height:20px;
+    fill:var(--wall-2);
+    opacity:0;
+    transform:translateY(4px) scale(.7);
+    animation:pop .45s cubic-bezier(.34,1.56,.64,1) forwards;
+  }
+  .stars svg:nth-child(1){ animation-delay:.35s }
+  .stars svg:nth-child(2){ animation-delay:.45s }
+  .stars svg:nth-child(3){ animation-delay:.55s }
+  .stars svg:nth-child(4){ animation-delay:.65s }
+  .stars svg:nth-child(5){ animation-delay:.75s }
+  .stars svg.fill{ fill:var(--saffron) }
+
+  p.tagline{
+    color:var(--ink-soft);
+    line-height:1.55;
+    font-size:15.5px;
+    margin:0 0 28px;
+    opacity:0;
+    animation:rise .6s ease forwards .3s;
+  }
+
+  .actions{
+    display:flex;
+    flex-direction:column;
+    gap:12px;
+    opacity:0;
+    animation:rise .6s ease forwards .4s;
+  }
+
+  a.btn{
+    position:relative;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:10px;
+    text-decoration:none;
+    padding:16px 18px;
+    border-radius:5px;
+    font-weight:600;
+    font-size:15.5px;
+    letter-spacing:.01em;
+    -webkit-tap-highlight-color:transparent;
+    transition:transform .15s ease, box-shadow .15s ease, background .15s ease;
+    will-change:transform;
+  }
+  a.btn svg{ width:18px; height:18px; flex:none; }
+
+  a.review{
+    background:var(--clay);
+    color:#FFF7EC;
+    box-shadow:0 1px 0 rgba(255,255,255,.15) inset, 0 10px 20px -8px rgba(166,58,44,.55);
+  }
+  a.review:hover{ background:#8f3125; transform:translateY(-2px); box-shadow:0 1px 0 rgba(255,255,255,.15) inset, 0 14px 24px -8px rgba(166,58,44,.6); }
+  a.review:active{ transform:translateY(0) scale(.97); box-shadow:0 1px 0 rgba(255,255,255,.1) inset, 0 6px 12px -6px rgba(166,58,44,.5); }
+
+  a.maps{
+    background:transparent;
+    color:var(--azulejo);
+    border:1.5px solid var(--azulejo);
+  }
+  a.maps:hover{ background:rgba(28,78,99,.06); transform:translateY(-2px); }
+  a.maps:active{ transform:translateY(0) scale(.97); background:rgba(28,78,99,.1); }
+
+  small.fallback{
+    display:block;
+    margin-top:18px;
+    color:#96897a;
+    font-size:12.5px;
+    opacity:0;
+    animation:rise .6s ease forwards .5s;
+  }
+
+  @keyframes rise{ from{opacity:0; transform:translateY(8px)} to{opacity:1; transform:translateY(0)} }
+  @keyframes pop{ to{opacity:1; transform:translateY(0) scale(1)} }
+
+  @media (prefers-reduced-motion: reduce){
+    .eyebrow, h1, p.tagline, .actions, small.fallback, .stars svg{
+      animation:none !important; opacity:1 !important; transform:none !important;
+    }
+  }
+
+  a.btn:focus-visible, a.maps:focus-visible{
+    outline:2px solid var(--saffron);
+    outline-offset:2px;
+  }
+</style>
+</head>
+<body>
+<main>
+  <div class="tiles" aria-hidden="true">
+    <!-- repeating hand-set azulejo motif, 8 tiles -->
+    <svg viewBox="0 0 40 40"><rect width="40" height="40" fill="#1C4E63"/><path d="M20 4 L36 20 L20 36 L4 20 Z" fill="#F7EFDD"/><circle cx="20" cy="20" r="5" fill="#D79922"/></svg>
+    <svg viewBox="0 0 40 40"><rect width="40" height="40" fill="#F7EFDD"/><path d="M20 4 L36 20 L20 36 L4 20 Z" fill="#1C4E63"/></svg>
+    <svg viewBox="0 0 40 40"><rect width="40" height="40" fill="#1C4E63"/><path d="M20 4 L36 20 L20 36 L4 20 Z" fill="#F7EFDD"/><circle cx="20" cy="20" r="5" fill="#D79922"/></svg>
+    <svg viewBox="0 0 40 40"><rect width="40" height="40" fill="#F7EFDD"/><path d="M20 4 L36 20 L20 36 L4 20 Z" fill="#1C4E63"/></svg>
+    <svg viewBox="0 0 40 40"><rect width="40" height="40" fill="#1C4E63"/><path d="M20 4 L36 20 L20 36 L4 20 Z" fill="#F7EFDD"/><circle cx="20" cy="20" r="5" fill="#D79922"/></svg>
+    <svg viewBox="0 0 40 40"><rect width="40" height="40" fill="#F7EFDD"/><path d="M20 4 L36 20 L20 36 L4 20 Z" fill="#1C4E63"/></svg>
+    <svg viewBox="0 0 40 40"><rect width="40" height="40" fill="#1C4E63"/><path d="M20 4 L36 20 L20 36 L4 20 Z" fill="#F7EFDD"/><circle cx="20" cy="20" r="5" fill="#D79922"/></svg>
+    <svg viewBox="0 0 40 40"><rect width="40" height="40" fill="#F7EFDD"/><path d="M20 4 L36 20 L20 36 L4 20 Z" fill="#1C4E63"/></svg>
+  </div>
+
+  <div class="content">
+    <span class="eyebrow">Riba-roja de Túria</span>
+    <h1>Casa&nbsp;Samson</h1>
+
+    <div class="stars" aria-hidden="true">
+      <svg class="fill" viewBox="0 0 20 20"><path d="M10 1l2.6 5.6 6.1.6-4.6 4.1 1.3 6-5.4-3.1-5.4 3.1 1.3-6L1.3 7.2l6.1-.6z"/></svg>
+      <svg class="fill" viewBox="0 0 20 20"><path d="M10 1l2.6 5.6 6.1.6-4.6 4.1 1.3 6-5.4-3.1-5.4 3.1 1.3-6L1.3 7.2l6.1-.6z"/></svg>
+      <svg class="fill" viewBox="0 0 20 20"><path d="M10 1l2.6 5.6 6.1.6-4.6 4.1 1.3 6-5.4-3.1-5.4 3.1 1.3-6L1.3 7.2l6.1-.6z"/></svg>
+      <svg class="fill" viewBox="0 0 20 20"><path d="M10 1l2.6 5.6 6.1.6-4.6 4.1 1.3 6-5.4-3.1-5.4 3.1 1.3-6L1.3 7.2l6.1-.6z"/></svg>
+      <svg class="fill" viewBox="0 0 20 20"><path d="M10 1l2.6 5.6 6.1.6-4.6 4.1 1.3 6-5.4-3.1-5.4 3.1 1.3-6L1.3 7.2l6.1-.6z"/></svg>
+    </div>
+
+    <p class="tagline">Gracias por tu visita. Si te ha gustado la comida, nos ayudaría muchísimo que lo contaras en Google — solo lleva un momento.</p>
+
+    <div class="actions">
+      <a class="btn review" rel="noopener"
+         href="https://search.google.com/local/writereview?placeid=ChIJxRVNFABZYA0R6H2YtxLNIZs">
+        <svg viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.6 5.6 6.1.6-4.6 4.1 1.3 6-5.4-3.1-5.4 3.1 1.3-6L1.3 7.2l6.1-.6z"/></svg>
+        Dejar una reseña en Google
+      </a>
+      <a class="btn maps" rel="noopener"
+         href="https://www.google.com/maps/search/?api=1&query=Casa+Samson%2C+Riba-roja+de+T%C3%BAria&query_place_id=ChIJxRVNFABZYA0R6H2YtxLNIZs">
+        <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M10 18s6-5.2 6-10a6 6 0 10-12 0c0 4.8 6 10 6 10z"/><circle cx="10" cy="8" r="2.2"/></svg>
+        Ver en Google Maps
+      </a>
+    </div>
+
+    <small class="fallback">Si el primer botón no abre correctamente, usa Google Maps.</small>
+  </div>
+
+  <div class="tiles" aria-hidden="true">
+    <svg viewBox="0 0 40 40"><rect width="40" height="40" fill="#F7EFDD"/><path d="M20 4 L36 20 L20 36 L4 20 Z" fill="#1C4E63"/></svg>
+    <svg viewBox="0 0 40 40"><rect width="40" height="40" fill="#1C4E63"/><path d="M20 4 L36 20 L20 36 L4 20 Z" fill="#F7EFDD"/><circle cx="20" cy="20" r="5" fill="#D79922"/></svg>
+    <svg viewBox="0 0 40 40"><rect width="40" height="40" fill="#F7EFDD"/><path d="M20 4 L36 20 L20 36 L4 20 Z" fill="#1C4E63"/></svg>
+    <svg viewBox="0 0 40 40"><rect width="40" height="40" fill="#1C4E63"/><path d="M20 4 L36 20 L20 36 L4 20 Z" fill="#F7EFDD"/><circle cx="20" cy="20" r="5" fill="#D79922"/></svg>
+    <svg viewBox="0 0 40 40"><rect width="40" height="40" fill="#F7EFDD"/><path d="M20 4 L36 20 L20 36 L4 20 Z" fill="#1C4E63"/></svg>
+    <svg viewBox="0 0 40 40"><rect width="40" height="40" fill="#1C4E63"/><path d="M20 4 L36 20 L20 36 L4 20 Z" fill="#F7EFDD"/><circle cx="20" cy="20" r="5" fill="#D79922"/></svg>
+    <svg viewBox="0 0 40 40"><rect width="40" height="40" fill="#F7EFDD"/><path d="M20 4 L36 20 L20 36 L4 20 Z" fill="#1C4E63"/></svg>
+    <svg viewBox="0 0 40 40"><rect width="40" height="40" fill="#1C4E63"/><path d="M20 4 L36 20 L20 36 L4 20 Z" fill="#F7EFDD"/><circle cx="20" cy="20" r="5" fill="#D79922"/></svg>
+  </div>
+</main>
+</body>
+</html>
